@@ -1,8 +1,9 @@
 import DemoComponent from "./Component/DemoComponent";
 import "./Component/DemoCss.css";
 import { useState } from "react";
-import iron from './image/iron.jpg';
+import iron from "./image/iron.jpg";
 import ChildFormComponent from "./Component/ChildFormComponent";
+import { Button, Form, } from "react-bootstrap";
 
 function App() {
   var [count, setCount] = useState(0);
@@ -28,57 +29,61 @@ function App() {
     b(`reseted to 0`);
   };
 
-
   const pointerLeave = () => {
     b1("ab chhu ke dikha");
   };
 
-
-  const name='';
-  const salary=0;
-  const date='';
-  const[getname,setName]=useState(name);
-  const[getSalary,setSalary]=useState(salary);
-  const [getDate,setDate]=useState(date);
-  const data={name:getname,salary:getSalary,date:getDate};
-  const nameHandler=(event)=>{
+  const name = "";
+  const salary = "";
+  const date = "";
+  const [getname, setName] = useState(name);
+  const [getSalary, setSalary] = useState(salary);
+  const [getDate, setDate] = useState(date);
+  const data = { name: getname, salary: getSalary, date: getDate };
+  const [nameCss,setNameCss]=useState("pink");
+  const [salaryCss,setSalaryCss]=useState("pink");
+  const [dateCss,setDateCss]=useState("pink");
+  const nameHandler = (event) => {
     setName(event.target.value);
-    setSalary(event.target.value)
+    setNameCss("aqua");
     console.log(getname);
+    
   };
-  const dateHandler=(event)=>{
+  const dateHandler = (event) => {
     setDate(event.target.value);
+    setDateCss("aqua");
     console.log(getDate);
   };
-  const salaryHandler=(event)=>{
-    setSalary(event.target.value)
+  const salaryHandler = (event) => {
+    setSalary(event.target.value);
+    setSalaryCss("aqua");
     console.log(getSalary);
   };
 
-  const submitHamdler=(event)=>{
+  const submitHamdler = (event) => {
     event.preventDefault();
     console.log(data);
   };
-  var location="";
-  var country="";
-  var pincode="";
-  const [getLocation,setLocation]=useState(location);
-  const [getCountry,setCountry]=useState(country);
-  const [getPincode,setPincode]=useState(pincode);
-  const ChildComHandler=(pars)=>{
+  var location = "";
+  var country = "";
+  var pincode = "";
+  const [getLocation, setLocation] = useState(location);
+  const [getCountry, setCountry] = useState(country);
+  const [getPincode, setPincode] = useState(pincode);
+  const ChildComHandler = (pars) => {
     setLocation(pars.location);
     setCountry(pars.country);
     setPincode(pars.pincode);
+  };
 
-  }
-
-  const clearHandler=()=>{
-    setName("")
+  const clearHandler = () => {
+    setName("");
     setDate("");
     setSalary("");
   };
   return (
     <div>
+      <title>My App</title>
       <button
         onClick={onClickFunctiin}
         onPointerMove={onWaiting}
@@ -86,21 +91,53 @@ function App() {
       >
         {a1}
       </button>
-      
+
       <button onClick={resetCountVar}>reset the value</button>
       <h1>{a}</h1>
-      <a href="https:\\www.google.com" target="_blank">google karna hai</a> 
-      <form onSubmit={submitHamdler}>
-        <label>Main form</label>
-        <input type='text'  onChange={nameHandler} value={getname}/>
-        <input type='number' onChange={salaryHandler} value={getSalary}/>
-        <input type='date' onChange={dateHandler} value={getDate}/>
-        <button type="submit">save</button>
-        </form>
-        <div>{<ChildFormComponent onChildSave={ChildComHandler}/>}</div> 
-        <p >{<DemoComponent name={getname} salary={getSalary} date={getDate} location={getLocation} country={getCountry}/>}</p> 
-        <button onClick={clearHandler}>Clear All</button>
-        
+      <a href="https:\\www.google.com" target="_blank">
+        google karna hai
+      </a>
+      <div>{<ChildFormComponent onChildSave={ChildComHandler} />}</div>
+      <Form onSubmit={submitHamdler}>
+        <Form.Group>
+          <Form.Label style={{backgroundColor:'pink'}}>Main form</Form.Label>
+          <Form.Control
+            type="text"
+            style={{backgroundColor:nameCss}}
+            onChange={nameHandler}
+            value={getname}
+            placeholder="Enter name"
+          />
+          <Form.Control
+            type="number"
+            style={{ backgroundColor: salaryCss }}
+            onChange={salaryHandler}
+            value={getSalary}
+            placeholder="Enter salary"
+          />
+          <Form.Control
+            type="date"
+            style={{ backgroundColor: dateCss }}
+            onChange={dateHandler}
+            value={getDate}
+          />
+          <Button type="submit">save</Button>
+        </Form.Group>
+      </Form>
+      <>
+        {
+          <DemoComponent
+            name={getname}
+            salary={getSalary}
+            date={getDate}
+            location={getLocation}
+            country={getCountry}
+            pincode={getPincode}
+          />
+        }
+      </>
+      <button onClick={clearHandler}>Clear All</button>
+      
     </div>
   );
 }
