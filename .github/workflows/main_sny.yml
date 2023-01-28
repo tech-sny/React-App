@@ -23,8 +23,7 @@ jobs:
 
       - name: npm install, build
         run: |
-          npm audit fix --force
-          npm install react-scripts --save
+          npm install --if-present
           npm run build
 
       - name: Upload artifact for deployment job
