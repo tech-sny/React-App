@@ -23,7 +23,7 @@ jobs:
 
       - name: npm install, build
         run: |
-          npm install
+          npm install react-scripts --save
           npm run build
 
       - name: Upload artifact for deployment job
