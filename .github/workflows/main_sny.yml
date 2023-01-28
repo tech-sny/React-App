@@ -23,7 +23,7 @@ jobs:
 
       - name: npm install, build
         run: |
-          npm audit fix
+          npm audit fix --force
           npm install react-scripts --save
           npm run build
 
