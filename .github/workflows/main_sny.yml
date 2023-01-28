@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install, build
+      - name: npm install, build, and test
         run: |
-          npm audit fix --force
-          npm install react-scripts --save
-          npm run build
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'sny'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D9B40B9CE7434BF2814B099937C0922B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E62BC61CDBC349ECB22B5451C5317F1E }}
           package: .
